@@ -1,0 +1,15 @@
+<?php
+require_once __DIR__.'/vendor/autoload.php';
+
+use thiagoalessio\TesseractOCR\TesseractOCR;
+
+# saving image locally
+$imageUrl = 'https://files.gitter.im/thiagoalessio/tesseract-ocr-for-php/gFLb/deretan.png';
+$imageTempName = tempnam(sys_get_temp_dir(), 'image-from-kartaterazu');
+file_put_contents($imageTempName, file_get_contents($imageUrl));
+
+# recognizing it
+$ocr = new TesseractOCR($imageTempName);
+$ocr->psm(4);
+echo $ocr->run(), PHP_EOL;
+?>
